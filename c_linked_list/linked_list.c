@@ -1,5 +1,33 @@
 #include "linked_list.h"
 
+
+/*
+
+  ************************************
+  *    LINKED LIST CORE FUNCTIONS    *
+  ************************************
+
+
+
+  ***********************
+  * INSERTION FUNCTIONS *
+  ***********************
+
+*/
+
+void append (struct ll* _lst, uint8_t _value)
+{
+  struct node *n = new_node(_value);
+  if(_lst->length == 0)
+    _lst->head = _lst->tail = n;
+  else
+  {
+    _lst->tail->next = n;
+    _lst->tail = n;
+  }
+  ++_lst->length;
+}
+
 void prepend (struct ll* _lst, uint8_t val)
 {
   struct node *n = new_node(val); 
@@ -14,8 +42,18 @@ void prepend (struct ll* _lst, uint8_t val)
     _lst->head = n;
   }
   ++_lst->length;
-
 }
+
+/*****************************************/
+
+/*
+
+ ***********************
+ *  DELETION FUNCTIONS *
+ ***********************
+
+*/
+
 
 void del_ll (struct ll* _lst)
 {
@@ -29,6 +67,7 @@ void del_ll (struct ll* _lst)
   _lst->head = _lst->tail = NULL;
   _lst->length = 0;
 }
+
 
 void delete_first(struct ll* _lst)
 {
@@ -48,58 +87,6 @@ void delete_first(struct ll* _lst)
   --_lst->length;
 }
 
-void append (struct ll* _lst, uint8_t _value)
-{
-  struct node *n = new_node(_value);
-  if(_lst->length == 0)
-    _lst->head = _lst->tail = n;
-  else
-  {
-    _lst->tail->next = n;
-    _lst->tail = n;
-  }
-  ++_lst->length;
-}
-
-struct node * new_node(uint8_t _value)
-{
-  struct node *n = (struct node*) malloc(sizeof(struct node));
-  n->val = _value;
-  n->next = NULL;
-  return n;
-}
-
-struct ll* init_ll()
-{
-  struct ll *p = (struct ll*) malloc(sizeof(struct ll));
-  p->head = NULL;
-  p->tail = NULL;
-  p->length = 0;
-  return p;
-}
-
-
-void print_length (struct ll* p)
-{
-  printf ("Length: %d\n", p->length);
-}
-void print_head (struct ll* p)
-{
-  printf("Head: ");
-  if(p->head)
-    printf("%d\n", p->head->val);
-  else
-    printf("NULL\n");
-}
-
-void print_tail (struct ll* p)
-{
-  printf("Tail: ");
-  if(p->tail)
-    printf("%d\n", p->tail->val);
-  else
-    printf("NULL\n");
-}
 
 void delete_last (struct ll* _lst)
 {
@@ -122,6 +109,74 @@ void delete_last (struct ll* _lst)
   --_lst->length;
 }
 
+
+/*****************************************/
+
+/*
+
+ ************************
+ *  CREATION FUNCTIONS  *
+ ************************
+
+*/
+
+struct node *new_node(uint8_t _value)
+{
+  struct node *n = (struct node*) malloc(sizeof(struct node));
+  n->val = _value;
+  n->next = NULL;
+  return n;
+}
+
+
+struct ll *init_ll()
+{
+  struct ll *p = (struct ll*) malloc(sizeof(struct ll));
+  p->head = NULL;
+  p->tail = NULL;
+  p->length = 0;
+  return p;
+}
+
+
+/*****************************************/
+
+/*
+
+ ************************
+ *  PRINTING FUNCTIONS  *
+ ************************
+
+*/
+
+void print_length (struct ll* p)
+{
+  printf ("Length: %d\n", p->length);
+}
+
+
+void print_head (struct ll* p)
+{
+  printf("Head: ");
+  if(p->head)
+    printf("%d\n", p->head->val);
+  else
+    printf("NULL\n");
+}
+
+
+void print_tail (struct ll* p)
+{
+  printf("Tail: ");
+  if(p->tail)
+    printf("%d\n", p->tail->val);
+  else
+    printf("NULL\n");
+}
+
+
+
+
 void print_list(struct ll* _lst)
 {
   struct node *temp = _lst->head;
@@ -136,6 +191,45 @@ void print_list(struct ll* _lst)
     temp = temp->next;
   }
 }
+
+
+/*****************************************/
+
+/*
+
+ ************************
+ *    OTHER FUNCTIONS   *
+ ************************
+
+*/
+
+
+void reverse(struct ll* _lst)
+{
+  if(_lst->length == 0 || _lst->length == 1)
+    return;
+  else
+  {
+    struct node *temp, *before, *after;
+
+     temp = _lst->head;
+    _lst->head = _lst->tail;
+    _lst->tail = temp;
+    
+    before = NULL;
+    after = temp->next;
+
+    while(temp)
+    {
+      temp->next = before;
+      before = temp;
+      temp = after;
+      if(after)
+        after = after->next;
+    }
+  }
+}
+
 
 int8_t get_index(struct ll* _lst, int8_t _index)
 {
@@ -157,6 +251,17 @@ int8_t get_index(struct ll* _lst, int8_t _index)
   }
 }
 
+
+/*****************************************/
+
+/*
+
+ ************************
+ *   HELPER FUNCTIONS   *
+ ************************
+
+*/
+
 uint8_t enter_value()
 {
   uint8_t __val = 0;
@@ -165,6 +270,7 @@ uint8_t enter_value()
   return __val;
 }
 
+
 int8_t enter_index()
 {
   int8_t __ind = 0;
@@ -172,6 +278,7 @@ int8_t enter_index()
   scanf("%hhd", &__ind);
   return __ind;
 }
+
 
 void lst_append(struct ll* _lst)
 {
@@ -183,30 +290,7 @@ void lst_prepend(struct ll* _lst)
   prepend(_lst, enter_value());
 }
 
-void reverse(struct ll* _lst)
-{
-  if(_lst->length == 0 || _lst->length == 1)
-    return;
-  else
-  {
-    struct node *temp = _lst->head;
-    _lst->head = _lst->tail;
-    _lst->tail = temp;
-    
-    struct node *before, *after;
-    before = NULL;
-    after = temp->next;
 
-    while(temp)
-    {
-      temp->next = before;
-      before = temp;
-      temp = after;
-      if(after)
-        after = after->next;
-    }
-  }
-}
 
 
 uint8_t confirm_deletion()
@@ -222,6 +306,3 @@ uint8_t confirm_deletion()
   else
     return 2;
 }
-
-
-
