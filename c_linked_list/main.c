@@ -78,8 +78,4 @@ int main(void)
       printf("WRONG_INPUT\n");
 
   }
-
-  del_ll(list);
-  free(list);
-  return 0;
 }
