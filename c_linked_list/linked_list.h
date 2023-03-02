@@ -17,6 +17,7 @@
 #define PRINT_LENGTH "l" 
 #define PRINT_INDEX "i" 
 #define REVERSE "rev"
+#define GET_INDEX "get"
 #define QUIT "q"
 
 struct node
@@ -50,5 +51,6 @@ int8_t enter_index();
 void lst_append(struct ll*);
 void lst_prepend(struct ll*);
 void reverse(struct ll*);
+uint8_t confirm_deletion();
 
 #endif //LINKED_LIST_H

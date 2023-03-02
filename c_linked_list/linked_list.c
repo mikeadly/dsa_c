@@ -89,7 +89,7 @@ void print_head (struct ll* p)
   if(p->head)
     printf("%d\n", p->head->val);
   else
-    printf("IS_NULL!!\n");
+    printf("NULL\n");
 }
 
 void print_tail (struct ll* p)
@@ -98,7 +98,7 @@ void print_tail (struct ll* p)
   if(p->tail)
     printf("%d\n", p->tail->val);
   else
-    printf("IS_NULL!!\n");
+    printf("NULL\n");
 }
 
 void delete_last (struct ll* _lst)
@@ -209,7 +209,19 @@ void reverse(struct ll* _lst)
 }
 
 
-
+uint8_t confirm_deletion()
+{
+  char answer = 0;
+  printf("Delete All The List? y/n: ");
+  scanf(" %c", &answer);
+  
+  if(answer == 'y')
+      return 1;
+  else if(answer == 'n')
+    return 0;
+  else
+    return 2;
+}
 
 
 

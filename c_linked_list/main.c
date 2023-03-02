@@ -8,6 +8,7 @@ int main(void)
   
   while (1)
   {
+    print_list(list);
     printf("Enter func.: ");
     scanf("%s", input);
    
@@ -52,11 +53,27 @@ int main(void)
 
     /* Delete All The List */
     else if(!strcmp(DELETE_LIST, input))
-      del_ll(list);
+    {
+      if(list->length == 0)
+        continue;
+      uint8_t answer = confirm_deletion();
+      if(answer == 1)
+      {
+        del_ll(list);
+        printf("LIST DELETED\n");
+      }
+      else if(answer == 2)
+        printf("WORNG_INPUT\n");
+    }
 
     /* Reverse The List */
     else if(!strcmp(REVERSE, input))
       reverse(list);
+
+    /* Get Value From Node By Index */
+    else if (!strcmp(GET_INDEX, input))
+      printf("Value: %d\n", get_index(list, enter_index()));
+
     else
       printf("WRONG_INPUT\n");
 
