@@ -19,6 +19,7 @@
 #define PREPEND "pre" 
 #define DELETE_FIRST "df" 
 #define DELETE_LAST "dl" 
+#define DELETE_INDEX "di"
 #define DELETE_LIST "da"
 #define PRINT_LIST "p" 
 #define PRINT_HEAD "h" 
@@ -99,6 +100,10 @@ void delete_first(struct ll*);
  */
 void delete_last (struct ll*);
 
+/**
+ * Delete node by given index
+ */
+void delete_index(struct ll*, int8_t);
 
 /**
  * Delete all the nodes of the linked list.

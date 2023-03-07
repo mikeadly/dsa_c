@@ -110,6 +110,23 @@ void delete_last (struct ll* _lst)
 }
 
 
+void delete_index(struct ll* _lst, int8_t _index)
+{
+  if(_index < 0 || _index >= _lst->length)
+    return;
+  else if(_index == 0)
+    delete_first(_lst);
+  else if(_index == _lst->length-1)
+    delete_last(_lst);
+  else
+  {
+    struct node* before = get_index_address(_lst, _index-1);
+    struct node* to_be_deleted = before->next;
+    before->next = to_be_deleted->next;
+    free(to_be_deleted);
+    --_lst->length;
+  }
+}
 /*****************************************/
 
 /*

@@ -44,6 +44,11 @@ int main(void)
     else if(!strcmp(DELETE_LAST, input))
       delete_last(list);
 
+    /* Delete node by index */
+    else if(!strcmp(DELETE_INDEX, input))
+      delete_index(list, enter_index());
+
+
     /* Print Length*/
     else if(!strcmp(PRINT_LENGTH, input))
       print_length(list);
