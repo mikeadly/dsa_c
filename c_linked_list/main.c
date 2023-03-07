@@ -27,7 +27,8 @@ int main(void)
     /* Append Node */
     else if(!strcmp(APPEND, input))
       lst_append(list);
-
+    
+    /* Prepend Node */
     else if(!strcmp(PREPEND, input))
       lst_prepend(list);
 
