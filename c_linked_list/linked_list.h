@@ -27,6 +27,7 @@
 #define PRINT_INDEX "i" 
 #define REVERSE "rev"
 #define GET_INDEX "get"
+#define INSERT "ins"
 #define QUIT "q"
 
 
@@ -114,7 +115,20 @@ void print_list(struct ll*);
 /**
  * Returns a value of a given index.
  */
-int8_t get_index(struct ll*, int8_t);
+int8_t get_index_value(struct ll*, int8_t);
+
+
+/**
+ * Return memory address of given inde.
+ */
+
+struct node* get_index_address(struct ll*, int8_t);
+
+/**
+ * insert node at given index
+ */
+
+void insert_value(struct ll*, int8_t, int8_t);
 
 
 /**

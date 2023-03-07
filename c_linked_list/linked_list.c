@@ -231,7 +231,7 @@ void reverse(struct ll* _lst)
 }
 
 
-int8_t get_index(struct ll* _lst, int8_t _index)
+int8_t get_index_value(struct ll* _lst, int8_t _index)
 {
   if (_index < 0 || _index >= _lst->length)
   {
@@ -248,6 +248,45 @@ int8_t get_index(struct ll* _lst, int8_t _index)
     while (_index--)
       temp = temp->next;
     return temp->val;
+  }
+}
+
+struct node* get_index_address(struct ll* _lst, int8_t _index)
+{
+  if (_index < 0 || _index >= _lst->length)
+  {
+    printf("INDEX_OUT_OF_RANGE\n");
+    return NULL;
+  }
+  else if (_index == 0)
+  {
+    return _lst->head;
+  }
+  else
+  {
+    struct node *temp = _lst->head;
+    while (_index--)
+      temp = temp->next;
+    return temp;
+  }
+}
+
+
+void insert_value(struct ll* _lst, int8_t _index, int8_t _value)
+{
+  if(_index < 0 || _index > _lst->length)
+    return;
+  else if(_index == 0)
+    prepend(_lst, _value);
+  else if(_index == _lst->length)
+    append(_lst, _value);
+  else
+  {
+    struct node *new = new_node(_value);
+    struct node *temp = get_index_address(_lst,_index-1);
+    new->next = temp->next;
+    temp->next = new;
+    ++_lst->length;
   }
 }
 

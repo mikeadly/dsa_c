@@ -31,6 +31,11 @@ int main(void)
     else if(!strcmp(PREPEND, input))
       lst_prepend(list);
 
+
+    /* Insert Node by index */
+    else if(!strcmp(INSERT, input))
+      insert_value(list, enter_index(), enter_value());
+
     /* Delete First Node */
     else if(!strcmp(DELETE_FIRST, input))
       delete_first(list);
@@ -72,7 +77,7 @@ int main(void)
 
     /* Get Value From Node By Index */
     else if (!strcmp(GET_INDEX, input))
-      printf("Value: %d\n", get_index(list, enter_index()));
+      printf("Value: %d\n", get_index_value(list, enter_index()));
 
     else
       printf("WRONG_INPUT\n");
